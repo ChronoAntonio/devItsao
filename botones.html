@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botones Animados 150x35px</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem 2rem;
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .button-label {
+            color: #aaa;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* Estilo base de botón */
+        .btn {
+            width: 150px;
+            height: 35px;
+            border: none;
+            border-radius: 5px;
+            background: #1a1a2e;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        /* 1. Borde Neón Pulsante */
+        .btn-neon-pulse {
+            border: 2px solid #00ffff;
+            box-shadow: 
+                0 0 5px #00ffff,
+                0 0 10px #00ffff,
+                inset 0 0 5px rgba(0, 255, 255, 0.2);
+            animation: neonPulse 1.5s ease-in-out infinite;
+        }
+
+        .btn-neon-pulse:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        @keyframes neonPulse {
+            0%, 100% {
+                box-shadow: 
+                    0 0 5px #00ffff,
+                    0 0 10px #00ffff,
+                    inset 0 0 5px rgba(0, 255, 255, 0.2);
+            }
+            50% {
+                box-shadow: 
+                    0 0 10px #00ffff,
+                    0 0 20px #00ffff,
+                    0 0 30px #00ffff,
+                    inset 0 0 10px rgba(0, 255, 255, 0.4);
+            }
+        }
+
+        /* 2. Borde Gradiente Animado */
+        .btn-gradient-border {
+            background: #1a1a2e;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        .btn-gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(
+                90deg,
+                #ff6b6b,
+                #feca57,
+                #48dbfb,
+                #ff9ff3,
+                #ff6b6b
+            );
+            border-radius: 5px;
+            z-index: -1;
+            background-size: 300% 100%;
+            animation: gradientShift 3s linear infinite;
+        }
+
+        .btn-gradient-border:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 0%; }
+        }
+
+        /* 3. Borde Chispeante */
+        .btn-sparkle {
+            border: 2px solid #ffd700;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .btn-sparkle:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                box-shadow: 
+                    0 0 5px #ffd700,
+                    0 0 10px #ffd700;
+                border-color: #ffd700;
+            }
+            25% {
+                box-shadow: 
+                    0 0 10px #ffd700,
+                    0 0 20px #ffd700,
+                    0 0 30px #ffd700;
+                border-color: #ffed4e;
+            }
+            50% {
+                box-shadow: 
+                    0 0 5px #ffd700,
+                    0 0 10px #ffd700;
+                border-color: #ffd700;
+            }
+            75% {
+                box-shadow: 
+                    0 0 10px #ffd700,
+                    0 0 20px #ffd700,
+                    0 0 30px #ffd700;
+                border-color: #ffed4e;
+            }
+        }
+
+        /* 4. Borde Deslizante */
+        .btn-sliding {
+            border: 2px solid transparent;
+            background: linear-gradient(#1a1a2e, #1a1a2e) padding-box,
+                        linear-gradient(90deg, #ee0979, #ff6a00) border-box;
+            position: relative;
+        }
+
+        .btn-sliding::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(90deg, #ee0979, #ff6a00);
+            border-radius: 5px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn-sliding:hover::before {
+            opacity: 1;
+            animation: slideGlow 0.8s ease-in-out infinite;
+        }
+
+        @keyframes slideGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+        }
+
+        /* 5. Borde de Rayas Rotatorias */
+        .btn-rotating-stripes {
+            background: #1a1a2e;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-rotating-stripes::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: repeating-linear-gradient(
+                45deg,
+                #00ff88,
+                #00ff88 5px,
+                #0088ff 5px,
+                #0088ff 10px
+            );
+            border-radius: 5px;
+            z-index: -1;
+            animation: rotateStripes 1.5s linear infinite;
+        }
+
+        @keyframes rotateStripes {
+            0% { transform: rotate(0deg) scale(1.5); }
+            100% { transform: rotate(360deg) scale(1.5); }
+        }
+
+        /* 6. Borde de Puntos Marchantes */
+        .btn-dots {
+            border: 3px dotted #ff00ff;
+            background: #1a1a2e;
+            animation: dotsMarch 1s linear infinite;
+        }
+
+        .btn-dots:hover {
+            border-color: #ff66ff;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+        }
+
+        @keyframes dotsMarch {
+            0% { border-image-slice: 1; }
+            100% { 
+                border-image-slice: 1;
+                background-position: 10px 0;
+            }
+        }
+
+        /* 7. Borde Arcoíris Giratorio */
+        .btn-rainbow {
+            background: #1a1a2e;
+            position: relative;
+            border: none;
+        }
+
+        .btn-rainbow::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: conic-gradient(
+                from 0deg,
+                #ff0000,
+                #ff7f00,
+                #ffff00,
+                #00ff00,
+                #0000ff,
+                #8b00ff,
+                #ff0000
+            );
+            border-radius: 5px;
+            z-index: -1;
+            animation: rainbowSpin 2s linear infinite;
+        }
+
+        @keyframes rainbowSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 8. Borde de Onda Eléctrica */
+        .btn-electric {
+            border: 2px solid #00d4ff;
+            background: #1a1a2e;
+            position: relative;
+        }
+
+        .btn-electric::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(0, 212, 255, 0.8),
+                transparent
+            );
+            border-radius: 5px;
+            animation: electricWave 1.5s linear infinite;
+        }
+
+        .btn-electric:hover {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+        }
+
+        @keyframes electricWave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+        }
+
+        /* 9. Borde Expansivo con Pulso */
+        .btn-expand {
+            border: 2px solid #ff1744;
+            background: #1a1a2e;
+            animation: expandPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes expandPulse {
+            0%, 100% {
+                border-width: 2px;
+                box-shadow: 0 0 0 0 rgba(255, 23, 68, 0.7);
+            }
+            50% {
+                border-width: 3px;
+                box-shadow: 0 0 0 8px rgba(255, 23, 68, 0);
+            }
+        }
+
+        /* 10. Borde de Esquinas Brillantes */
+        .btn-corners {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: #1a1a2e;
+            position: relative;
+        }
+
+        .btn-corners::before,
+        .btn-corners::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border: 2px solid #00ffaa;
+            transition: all 0.3s;
+        }
+
+        .btn-corners::before {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 5px 0 0 0;
+            animation: cornerGlowTL 1.5s ease-in-out infinite;
+        }
+
+        .btn-corners::after {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 5px 0;
+            animation: cornerGlowBR 1.5s ease-in-out infinite;
+        }
+
+        @keyframes cornerGlowTL {
+            0%, 100% {
+                box-shadow: 0 0 5px #00ffaa;
+            }
+            50% {
+                box-shadow: 0 0 15px #00ffaa, 0 0 25px #00ffaa;
+            }
+        }
+
+        @keyframes cornerGlowBR {
+            0%, 100% {
+                box-shadow: 0 0 5px #00ffaa;
+            }
+            50% {
+                box-shadow: 0 0 15px #00ffaa, 0 0 25px #00ffaa;
+            }
+        }
+
+        /* 11. Borde de Fuego */
+        .btn-fire {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d1a1a 100%);
+            border: 2px solid #ff4500;
+            position: relative;
+            animation: fireFlicker 0.3s ease-in-out infinite;
+        }
+
+        .btn-fire:hover {
+            box-shadow: 
+                0 0 10px #ff4500,
+                0 0 20px #ff6347,
+                0 0 30px #ff7f50;
+        }
+
+        @keyframes fireFlicker {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
+                border-color: #ff4500;
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(255, 99, 71, 0.7);
+                border-color: #ff6347;
+            }
+        }
+
+        /* 12. Borde de Láser */
+        .btn-laser {
+            background: #1a1a2e;
+            border: 2px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-laser::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #00ff00,
+                transparent
+            );
+            animation: laserScan 2s linear infinite;
+        }
+
+        @keyframes laserScan {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        /* 13. Borde de Partículas Flotantes */
+        .btn-particles {
+            background: #1a1a2e;
+            border: 2px solid rgba(138, 43, 226, 0.5);
+            position: relative;
+        }
+
+        .btn-particles::before,
+        .btn-particles::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #8a2be2;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #8a2be2;
+        }
+
+        .btn-particles::before {
+            top: 5px;
+            left: 10px;
+            animation: floatParticle1 3s ease-in-out infinite;
+        }
+
+        .btn-particles::after {
+            bottom: 5px;
+            right: 10px;
+            animation: floatParticle2 3s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatParticle1 {
+            0%, 100% { transform: translate(0, 0); opacity: 1; }
+            50% { transform: translate(130px, 0); opacity: 0.3; }
+        }
+
+        @keyframes floatParticle2 {
+            0%, 100% { transform: translate(0, 0); opacity: 1; }
+            50% { transform: translate(-130px, 0); opacity: 0.3; }
+        }
+
+        /* 14. Borde de Onda Sónica */
+        .btn-sonic {
+            background: #1a1a2e;
+            border: 2px solid #00bfff;
+            position: relative;
+            animation: sonicWave 2s ease-in-out infinite;
+        }
+
+        @keyframes sonicWave {
+            0%, 100% {
+                box-shadow: 
+                    0 0 0 0 rgba(0, 191, 255, 0.7),
+                    0 0 0 0 rgba(0, 191, 255, 0.7);
+            }
+            50% {
+                box-shadow: 
+                    0 0 0 5px rgba(0, 191, 255, 0),
+                    0 0 0 10px rgba(0, 191, 255, 0);
+            }
+        }
+
+        /* 15. Borde de Matrix */
+        .btn-matrix {
+            background: #000000;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            animation: matrixGlitch 3s ease-in-out infinite;
+        }
+
+        @keyframes matrixGlitch {
+            0%, 90%, 100% {
+                border-color: #00ff00;
+                box-shadow: 0 0 5px #00ff00;
+            }
+            92%, 96% {
+                border-color: #00aa00;
+                box-shadow: 0 0 15px #00ff00;
+                transform: skew(2deg);
+            }
+            94%, 98% {
+                border-color: #00ff00;
+                transform: skew(-2deg);
+            }
+        }
+
+        /* 16. Borde de Cristal */
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.1),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+            animation: glassShimmer 3s ease-in-out infinite;
+        }
+
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        @keyframes glassShimmer {
+            0%, 100% {
+                box-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.1),
+                    inset 0 0 20px rgba(255, 255, 255, 0.05);
+            }
+            50% {
+                box-shadow: 
+                    0 0 30px rgba(255, 255, 255, 0.3),
+                    inset 0 0 30px rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* 17. Borde de Plasma */
+        .btn-plasma {
+            background: #1a1a2e;
+            position: relative;
+            border: none;
+        }
+
+        .btn-plasma::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(
+                45deg,
+                #ff00ff,
+                #00ffff,
+                #ffff00,
+                #ff00ff
+            );
+            border-radius: 5px;
+            z-index: -1;
+            background-size: 400% 400%;
+            animation: plasmaFlow 4s ease infinite;
+            filter: blur(5px);
+        }
+
+        @keyframes plasmaFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* 18. Borde de Tron */
+        .btn-tron {
+            background: #000000;
+            border: 2px solid #00d9ff;
+            color: #00d9ff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-tron::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                transparent,
+                rgba(0, 217, 255, 0.3),
+                transparent
+            );
+            animation: tronScan 3s linear infinite;
+        }
+
+        .btn-tron:hover {
+            box-shadow: 
+                0 0 10px #00d9ff,
+                inset 0 0 10px rgba(0, 217, 255, 0.3);
+        }
+
+        @keyframes tronScan {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .buttons-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 18 Estilos de Botones Animados 150x35px</h1>
+
+    <div class="buttons-grid">
+        <div class="button-container">
+            <button class="btn btn-neon-pulse">Click Me</button>
+            <span class="button-label">Neón Pulsante</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-gradient-border">Click Me</button>
+            <span class="button-label">Gradiente Animado</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-sparkle">Click Me</button>
+            <span class="button-label">Chispeante</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-sliding">Click Me</button>
+            <span class="button-label">Borde Deslizante</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-rotating-stripes">Click Me</button>
+            <span class="button-label">Rayas Rotatorias</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-dots">Click Me</button>
+            <span class="button-label">Puntos Marchantes</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-rainbow">Click Me</button>
+            <span class="button-label">Arcoíris Giratorio</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-electric">Click Me</button>
+            <span class="button-label">Onda Eléctrica</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-expand">Click Me</button>
+            <span class="button-label">Expansivo Pulso</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-corners">Click Me</button>
+            <span class="button-label">Esquinas Brillantes</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-fire">Click Me</button>
+            <span class="button-label">Fuego Parpadeante</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-laser">Click Me</button>
+            <span class="button-label">Escaneo Láser</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-particles">Click Me</button>
+            <span class="button-label">Partículas Flotantes</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-sonic">Click Me</button>
+            <span class="button-label">Onda Sónica</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-matrix">Click Me</button>
+            <span class="button-label">Matrix Glitch</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-glass">Click Me</button>
+            <span class="button-label">Cristal Brillante</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-plasma">Click Me</button>
+            <span class="button-label">Flujo de Plasma</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-tron">Click Me</button>
+            <span class="button-label">Tron Scanner</span>
+        </div>
+    </div>
+</body>
+</html>
